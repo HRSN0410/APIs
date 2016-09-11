@@ -1,4 +1,4 @@
-package io.hrsn.apis.scheduler;
+package com.minedrix.kitpvp.apis.scheduler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -14,13 +14,6 @@ import java.text.DecimalFormat;
  */
 public class SchedulerAPI {
 
-    public enum RunType {
-
-        SYNC,
-        ASYNC
-
-    }
-
     private static Plugin instance;
 
     public static boolean onEnable(Plugin pl) {
@@ -30,17 +23,17 @@ public class SchedulerAPI {
         return (instance != null);
 
     }
-    
-    public static void onDisable() {
-        
-        instance = null;
-        
-    }
-    
-    @SuppressWarnings("deprecation")
-    public static int scheduleDelayedTask(Runnable runnable, RunType runType) {
 
-        if (runType == RunType.ASYNC) {
+    public static void onDisable() {
+
+        instance = null;
+
+    }
+
+    @SuppressWarnings("deprecation")
+    public static int scheduleDelayedTask(Runnable runnable, boolean sync) {
+
+        if (!sync) {
 
             return Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(instance, runnable);
 
@@ -60,9 +53,9 @@ public class SchedulerAPI {
     }
 
     @SuppressWarnings("deprecation")
-    public static int scheduleDelayedTask(Runnable runnable, RunType runType, double delay) {
+    public static int scheduleDelayedTask(Runnable runnable, boolean sync, double delay) {
 
-        if (runType == RunType.ASYNC) {
+        if (!sync) {
 
             return Bukkit.getServer().getScheduler().scheduleAsyncDelayedTask(instance, runnable, (long)round(delay) * 20L);
 
@@ -82,9 +75,9 @@ public class SchedulerAPI {
     }
 
     @SuppressWarnings("deprecation")
-    public static int scheduleRepeatingTask(Runnable runnable, RunType runType, double interval) {
+    public static int scheduleRepeatingTask(Runnable runnable, boolean sync, double interval) {
 
-        if (runType == RunType.ASYNC) {
+        if (!sync) {
 
             return Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(instance, runnable, 0L, (long)round(interval) * 20L);
 
@@ -104,9 +97,9 @@ public class SchedulerAPI {
     }
 
     @SuppressWarnings("deprecation")
-    public static int scheduleRepeatingTask(Runnable runnable, RunType runType, double interval, double delay) {
+    public static int scheduleRepeatingTask(Runnable runnable, boolean sync, double interval, double delay) {
 
-        if (runType == RunType.ASYNC) {
+        if (!sync) {
 
             return Bukkit.getServer().getScheduler().scheduleAsyncRepeatingTask(instance, runnable, (long)round(delay) * 20L, (long)round(interval) * 20L);
 
@@ -125,13 +118,9 @@ public class SchedulerAPI {
 
     }
 
-    public static void delayMethodTest() {
+    public static void cancelTask(int taskID) {
 
-        SchedulerAPI.scheduleRepeatingTask(() -> {
-
-            // run code here
-
-        }, 5.3);
+        Bukkit.getServer().getScheduler().cancelTask(taskID);
 
     }
 
