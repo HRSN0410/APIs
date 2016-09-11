@@ -17,7 +17,7 @@ public void onDisable() {
     SchedulerAPI.onDisable();
 }
 ```
-Notice: The SchedulerAPI.onEnable() method returns a boolean if successful!
+Note: The SchedulerAPI.onEnable() method returns true if successful, false if not!
 
 ###Different ways of scheduling tasks using Lambdas (Java 8+)
 Sync Delayed Task (without delay?):
