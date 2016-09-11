@@ -5,11 +5,11 @@ An API dealing with the non-user-friendliness of the Bukkit API's Scheduler comp
 
 <b>To Use:</b> Copy/Paste the contents of the SchedulerAPI.java into a new class called SchedulerAPI in your bukkit plugin.
 
-<b>First,</b> you need to add the onEnable and onDisable methods.
+<b>First,</b> you need to add the following code to the onEnable and onDisable methods in your main class:
 ```java
 @Override
 public void onEnable() {
-    SchedulerAPI.onEnable();
+    SchedulerAPI.onEnable(this);
 }
 
 @Override
@@ -83,3 +83,22 @@ SchedulerAPI.scheduleRepeatingTask(() -> {
 ```java
 SchedulerAPI.cancelTask(int taskID);
 ```
+
+###Without Lambdas (All versions of Java)
+You can adapt the following snippets to meet your own needs:
+```java
+SchedulerAPI.scheduleDelayedTask(new Runnable() {
+    @Override
+    public void run() {
+        // run code here
+    }
+}, arguments);
+
+SchedulerAPI.scheduleRepeatingTask(new Runnable() {
+    @Override
+    public void run() {
+        // run code here
+    }
+}, arguments);
+```
+Note: I personally thing Lambdas look super cool, but if you want to use the old way, you can.
