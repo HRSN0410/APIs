@@ -23,14 +23,20 @@ public class SchedulerAPI {
 
     private static Plugin instance;
 
-    public static boolean setInstance(Plugin pl) {
+    public static boolean onEnable(Plugin pl) {
 
         instance = pl;
 
         return (instance != null);
 
     }
-
+    
+    public static void onDisable() {
+        
+        instance = null;
+        
+    }
+    
     @SuppressWarnings("deprecation")
     public static int scheduleDelayedTask(Runnable runnable, RunType runType) {
 
