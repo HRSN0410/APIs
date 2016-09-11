@@ -6,7 +6,7 @@ An API dealing with the non-user-friendliness of the Bukkit API's Scheduler comp
 <b>To Use:</b> Copy/Paste the contents of the SchedulerAPI.java into a new class called SchedulerAPI in your bukkit plugin.
 
 <b>First,</b> you need to add the onEnable and onDisable methods.
-```javascript
+```java
 @Override
 public void onEnable() {
     SchedulerAPI.onEnable();
