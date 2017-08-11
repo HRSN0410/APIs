@@ -50,9 +50,9 @@ Scheduler.scheduleRepeatingTask(() -> {
 
 As you can see, in some of these methods, there is a String argument called "options."
 You can input various options to change the behavior of the method.
-Some of the options include the following:
-```"sync:false"``` runs your code async.
-```"measurement:seconds"``` changes your delay to be in seconds instead of ticks.
+Some of the options include the following:<br><br>
+```"sync:false"``` runs your code async.<br>
+```"measurement:seconds"``` changes your delay to be in seconds instead of ticks.<br>
 ```"delay:10"``` (Repeating tasks only). Delays your repeating task by that many of ticks or seconds, depending on which time measurement you're using.
 
 
