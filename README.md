@@ -4,85 +4,57 @@
 An API dealing with the non-user-friendliness of the Bukkit API's Scheduler component.
 
 <b>To Use:</b> Copy/Paste the contents of the SchedulerAPI.java into a new class called SchedulerAPI in your bukkit plugin.
+(Then change the package name, of course)
 
 <b>First,</b> you need to add the following code to the onEnable and onDisable methods in your main class:
 ```java
 @Override
 public void onEnable() {
-    SchedulerAPI.onEnable(this);
+    Scheduler.onEnable(this);
 }
 
 @Override
 public void onDisable() {
-    SchedulerAPI.onDisable();
+    Scheduler.onDisable();
 }
 ```
 Note: The SchedulerAPI.onEnable() method returns true if successful, false if not!
 
-###Different ways of scheduling tasks using Lambdas (Java 8+)
-Sync Delayed Task (without delay?):
+Now, you're ready to use the API! There are two ways to schedule delayed tasks:
 ```java
-SchedulerAPI.scheduleDelayedTask(() -> {
-    // run code here
-});
+Scheduler.scheduleDelayedTask(() -> {
+
+}, double delayInTicks);
 ```
 
-Sync Delayed Task:
+Or, if you need more options, you can do it like this:
 ```java
-SchedulerAPI.scheduleDelayedTask(() -> {
-    // run code here
-}, double secondsUntilRun);
+Scheduler.scheduleDelayedTask(() -> {
+
+}, double delay, String options);
 ```
 
-Async Delayed Task (without delay?):
+Similarly enough, you can schedule a repeating task simply:
 ```java
-SchedulerAPI.scheduleDelayedTask(() -> {
-    // run code here
-}, boolean isSync);
-```
-If isSync is false, the task will run async.
+Scheduler.scheduleRepeatingTask(() -> {
 
-Async Delayed Task:
-```java
-SchedulerAPI.scheduleDelayedTask(() -> {
-    // run code here
-}, boolean isSync, double secondsUntilRun);
+}, double intervalInTicks);
 ```
 
-Sync Repeating Task:
+Or the more complicated way:
 ```java
-SchedulerAPI.scheduleRepeatingTask(() -> {
-    // run code here
-}, double timeBetweenRuns);
-```
-If you use this, the delay will automatically be 0L.
+Scheduler.scheduleRepeatingTask(() -> {
 
-Sync Repeating Task with Delay:
-```java
-SchedulerAPI.scheduleRepeatingTask(() -> {
-    // run code here
-}, double timeBetweenRuns, double secondsUntilRun);
+}, double delay, String options);
 ```
 
-Async Repeating Task:
-```java
-SchedulerAPI.scheduleRepeatingTask(() -> {
-    // run code here
-}, boolean isSync, double timeBetweenRuns);
-```
-As with the delayed tasks, if isSync is false, the task will run async.
+As you can see, in some of these methods, there is a String argument called "options."
+You can input various options to change the behavior of the method.
+Some of the options include the following:
+```"sync:false"``` runs your code async.
+```"measurement:seconds"``` changes your delay to be in seconds instead of ticks.
+```"delay:10"``` (Repeating tasks only). Delays your repeating task by that many of ticks or seconds, depending on which time measurement you're using.
 
-Async Repeating Task with Delay:
-```java
-SchedulerAPI.scheduleRepeatingTask(() -> {
-    // run code here
-}, boolean isSync, double timeBetweenRuns, double secondsUntilRun);
-```
-
-<b>NOTE!</b> All of these methods return an integer, which is the TaskID of the Bukkit task! To cancel a task, save the integer somewhere, and run this bit of code:
-```java
-SchedulerAPI.cancelTask(int taskID);
-```
 
 ###Without Lambdas (All versions of Java)
 You can adapt the following snippets to meet your own needs:
