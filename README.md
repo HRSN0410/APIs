@@ -45,7 +45,7 @@ Or the more complicated way:
 ```java
 Scheduler.scheduleRepeatingTask(() -> {
 
-}, double delay, String options);
+}, double interval, String options);
 ```
 
 As you can see, in some of these methods, there is a String argument called "options."
@@ -55,8 +55,17 @@ Some of the options include the following:<br><br>
 ```"measurement:seconds"``` changes your delay to be in seconds instead of ticks.<br>
 ```"delay:10"``` (Repeating tasks only). Delays your repeating task by that many of ticks or seconds, depending on which time measurement you're using.
 
+You can use multiple options in the same string. Seperate them with a space only. For example:
+```java
+Scheduler.scheduleRepeatingTask(() -> {
 
-###Without Lambdas (All versions of Java)
+
+}, 10, "sync:false measurement:seconds delay:5");
+
+```
+
+
+Without Lambdas (All versions of Java)
 You can adapt the following snippets to meet your own needs:
 ```java
 SchedulerAPI.scheduleDelayedTask(new Runnable() {
@@ -73,4 +82,3 @@ SchedulerAPI.scheduleRepeatingTask(new Runnable() {
     }
 }, arguments);
 ```
-Note: I personally thing Lambdas look super cool, but if you want to use the old way, you can.
